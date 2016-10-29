@@ -11,6 +11,8 @@ var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
 var MongoStore = require('connect-mongo')(session);
+var compression = require('compression');
+var Handlebars = require('handlebars');
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
@@ -36,7 +38,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 180 * 60 * 1000 }
+    cookie: { maxAge: 10 * 60 * 1000 }
 }));
 app.use(flash());
 app.use(passport.initialize());
@@ -48,6 +50,8 @@ app.use(function(req, res, next){
   res.locals.session = req.session;
   next();
 });
+
+app.use(compression());
 
 app.use('/user', userRoutes);
 app.use('/', routes);
@@ -83,5 +87,26 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+//Handlebar helper methods
+Handlebars.registerHelper('ifSoldout', function(conditional, options) {
+ //console.log(this.inventory);
+if(conditional <= 0) {
+  console.log('false');
+  return "<h2>TOO SLOW</h2>";
+} else {
+  console.log('true');
+  return options.fn(this);
+}
+});
+
+Handlebars.registerHelper('addGif', function(conditional, options) {
+  if(conditional <= 0) {
+    return '<img src="/images/1left.gif" class="img-responsive" alt="one left"/>';
+  }
+  else {
+    return options.fn(this);
+  }
+});
 
 module.exports = app;

@@ -79,6 +79,8 @@ router.post('/checkout', isLoggedIn, function(req, res, next){
     return res.redirect('/shopping-cart');
   }
   var cart = new Cart(req.session.cart);
+  console.log(cart);
+  cart.reduceInventory();
 
   var stripe = require("stripe")(
     "sk_test_NGDiDCBCL8KqyMYGhZQHErPK"
@@ -104,9 +106,9 @@ router.post('/checkout', isLoggedIn, function(req, res, next){
     });
     order.save(function(err, result){
       console.log(err);
-      req.flash('success', "Successfully bought product!");
+      req.flash('success', "Success! You're hype AF");
       req.session.cart = null;
-      res.redirect('/');
+      res.redirect('/shop');
       });
    });
 });
@@ -124,4 +126,4 @@ function isLoggedIn(req, res, next){
 
   req.session.oldUrl =  req.url;
   res.redirect('/user/signin');
-}
+};

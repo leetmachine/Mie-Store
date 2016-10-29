@@ -1,3 +1,6 @@
+var mongoose = require('mongoose');
+var Product = require('../models/product');
+
 module.exports = function Cart(oldCart) {
   this.items = oldCart.items || {};
   this.totalQty = oldCart.totalQty || 0;
@@ -40,5 +43,25 @@ module.exports = function Cart(oldCart) {
         arr.push(this.items[id]);
     }
     return arr;
+  };
+
+  this.reduceInventory = function() {
+    for (var id in this.items) {
+
+      var qty = this.items[id].qty;
+
+      Product.findById(id, function(err, product){
+
+        product.inventory -= qty;
+        product.save(function(err){
+          if(err)  {
+            throw err;
+          }
+          else {
+            console.log("product updated successfully");
+          };
+        });
+      });
+    }
   };
 };

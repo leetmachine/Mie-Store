@@ -1,14 +1,38 @@
+body {
+  background: url('/images/bodybg.jpg') no-repeat center center fixed;
+  background-attachment: fixed;
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+.center {
+  text-align: center;
+}
+.item {
+  min-width: 350px;
+}
+
 .thumbnail img{
   max-height: 150px;
 
 }
 
+
+
 .thumbnail .description {
   color: #7f7f7f;
 }
 
-.icon-fa {
-  color: rgba(0, 0, 0, 0.3);
+.icon-fa:hover {
+  color: rgba(0,0,0, 0.3);
 }
 
 .price {
@@ -17,8 +41,12 @@
 
 }
 
+.text-white {
+  color: rgb(255, 255, 255);
+}
+
   .full-bg {
-  background: url('/images/miebikini.jpg') no-repeat center center fixed;
+  background: url('/images/miebikini1.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -27,7 +55,20 @@
   width:100vw;
 }
 
-.footer {
+.header-image {
+  display: inline;
+  float: right;
+}
+
+.footer-text, .footer-links, .footer-link-item, .footer a{
+  color: #f8f8f8;
+}
+
+.footer p {
+  color: #b8b8b8;
+}
+
+.footer-splash {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -36,16 +77,28 @@
   text-align: center;
 }
 
-.footer-shop {
-  background: rgb(248, 248, 248);
+.footer {
+  flex: none;
 }
+
+.footer-shop {
+  background: rgba(0, 0, 0, .6);
+  height: 260px;
+}
+
+.navbar {
+  background: rgba(0,0,0,.6);
+  border: none;
+}
+
+
 
 .footer-links {
   list-style: none;
   text-align: center;
-  display: inline-block;
+  display: block;
+  float: none;
   padding-left: 0px;
-  margin-top: -10px;
 }
 
 .footer-link-item {
@@ -66,24 +119,74 @@ a:hover {
   max-height: 75vh;
 }
 
-.margin-bottom-100 {
-  margin-bottom: 100px;
+.margin-bottom-150 {
+  margin-bottom: 150px;
 }
 
 .footer-info {
   margin-top: 20px;
 }
 
-.footer-row {
-  display:inline-block;
-}
-
 .brand-image {
-  display: inline-block;
+  display: block;
+  float:none;
+  text-align: center;
 }
 
-.
+.list-group-item {
+  min-height: 50px;
+}
 
-@media only screen and (min-width: 600px) {
+.btn-default {
+  padding-bottom: 3px;
+}
 
+.padding-bottom-30 {
+  padding-bottom: 30px;
+}
+
+.padding-top-15 {
+  padding-top: 15px;
+}
+
+.width-big {
+  width: 300px;
+}
+
+strong {
+  color: #fff;
+}
+
+.btn-default:hover{
+  background: rgb(255, 0, 0);
+  color: #fff;
+}
+
+.shop-link {
+  float: left;
+
+}
+
+h1, h2, dt, dd {
+  color: #eee;
+}
+
+.checkout h4, label {
+  color: #fff;
+}
+
+.item h2 {
+  color: rgb(255, 0, 0);
+}
+
+@media only screen and (min-width: 520px) {
+  .width-big {
+    width: 500px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .navbar-brand {
+    margin-left: 0px !important;
+  }
 }
