@@ -123,9 +123,14 @@ a:hover {
   margin-bottom: 150px;
 }
 
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+
 .footer-info {
   margin-top: 20px;
 }
+
 
 .brand-image {
   display: block;
@@ -171,12 +176,25 @@ h1, h2, dt, dd {
   color: #eee;
 }
 
-.checkout h4, label {
+.checkout h4, h3, label, p {
   color: #fff;
 }
 
 .item h2 {
   color: rgb(255, 0, 0);
+}
+
+.grey-bg {
+  background-color: rgba(0,0,0,.6);
+}
+
+.big-checkbox {
+  width:30px;
+  height:30px;
+}
+
+.center {
+  text-align: center;
 }
 
 @media only screen and (min-width: 520px) {

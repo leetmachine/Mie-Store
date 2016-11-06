@@ -65,6 +65,37 @@ router.get('/shopping-cart', function(req, res, next){
   res.render('shop/shopping-cart', {products: cart.generateArray(), totalPrice: cart.totalPrice, showShop: true});
 });
 
+router.get('/shipping-check', isLoggedIn, function(req, res, next){
+  if (!req.session.cart){
+    return res.redirect('/shopping-cart');
+  }
+  var cart = new Cart(req.session.cart);
+  res.render('shop/shipping-check', {showShop: true});
+
+});
+
+router.get('/addFee', isLoggedIn, function(req, res, next){
+  if (!req.session.cart){
+    return res.redirect('/shopping-cart');
+  }
+  var cart = new Cart(req.session.cart);
+
+  cart.yesShipping();
+  req.session.cart = cart;
+  res.redirect('/checkout');
+});
+
+router.get('/noFee', isLoggedIn, function(req, res, next){
+  if (!req.session.cart){
+    return res.redirect('/shopping-cart');
+  }
+  var cart = new Cart(req.session.cart);
+
+  cart.noShipping();
+  req.session.cart = cart;
+  res.redirect('/checkout');
+});
+
 router.get('/checkout', isLoggedIn, function(req, res, next){
   if (!req.session.cart){
     return res.redirect('/shopping-cart');
@@ -116,6 +147,7 @@ router.post('/checkout', isLoggedIn, function(req, res, next){
 router.get('/other/privacy', function(req, res, next){
   res.render('other/privacy', {showShop: true});
 });
+
 
 module.exports = router;
 

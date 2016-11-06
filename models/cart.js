@@ -5,6 +5,21 @@ module.exports = function Cart(oldCart) {
   this.items = oldCart.items || {};
   this.totalQty = oldCart.totalQty || 0;
   this.totalPrice = oldCart.totalPrice || 0;
+  this.shipping = oldCart.shipping || false;
+
+  this.yesShipping = function() {
+    if(!this.shipping) {
+      this.totalPrice += 25;
+    }
+      this.shipping = true;
+  }
+
+  this.noShipping = function() {
+    if(this.shipping) {
+      this.totalPrice -= 25;
+    }
+    this.shipping = false;
+  }
 
   this.add = function(item, id, size) {
     var storedItem = this.items[id];

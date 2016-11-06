@@ -10,6 +10,7 @@ var session = require('express-session');
 var passport = require('passport');
 var flash = require('connect-flash');
 var validator = require('express-validator');
+var helmet = require('helmet');
 var MongoStore = require('connect-mongo')(session);
 var compression = require('compression');
 var Handlebars = require('handlebars');
@@ -33,19 +34,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(validator());
 app.use(cookieParser());
+app.set('trust proxy', 1);
 app.use(session({
     secret: 'mysupersecret',
+    name: 'sessionId',
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({mongooseConnection: mongoose.connection }),
-    cookie: { maxAge: 10 * 60 * 1000 }
+    cookie: { maxAge: 10 * 60 * 1000,
+              httpOnly: true} //; secure: true };
 }));
+app.use(helmet());
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
   res.locals.login = req.isAuthenticated();
   res.locals.session = req.session;
   next();
@@ -108,5 +116,6 @@ Handlebars.registerHelper('addGif', function(conditional, options) {
     return options.fn(this);
   }
 });
+
 
 module.exports = app;

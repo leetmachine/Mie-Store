@@ -4,7 +4,7 @@
       <div class="row col-md-8 col-md-offset-2">
           <a href="/"><h1 class="brand-image footer-text">MIE</h1></a>
             <ul class="footer-links">
-              <li class="footer-link-item"><a href="#">Sizing Chart</a></li>
+              <li class="footer-link-item" data-toggle="modal" data-target="#myModal"><a href="#">Sizing Chart</a></li>
               <li class="footer-link-item">&bull;</li>
               <li class="footer-link-item"><a href="#">Contact</a></li>
               <li class="footer-link-item">&bull;</li>
@@ -16,4 +16,48 @@
       </div>
     </div>
 </footer>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Sizing Chart</h4>
+      </div>
+      <div class="modal-body">
+        <div class="table-responsive">
+          
+        <table class="table table-bordered" style="width:100%">
+          <tr>
+            <th>Size</th>
+            <th>Waist</th>
+            <th>Top (Chest Under Bust)</th>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>28-30</td>
+            <td>30C, 32B, 34A</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>32-34</td>
+            <td>32C,34B,36A,34C,36E</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>34-36</td>
+            <td>34D,36C,38B</td>
+          </tr>
+        </table>
+
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {{/if}}
